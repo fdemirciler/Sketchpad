@@ -1,31 +1,59 @@
+// Get elements
+
 const btn = document.getElementById('button');
 
 btn.addEventListener('click', getNumber);
 
+const canvas = document.getElementsByClassName('container')[0];
+
+
+// User input and grid draw
 
 function getNumber() {
 
-    let num = parseInt(prompt('Please enter a number between 1 and 64'));
+    const num = parseInt(prompt('Please enter a number between 1 and 64'));
 
     if (!isNaN(num) && num > 0 && num < 65) {
 
-        console.log(num)
+        drawGrid(num)
 
     } else {
 
         alert('Please enter a number between 1 and 64')
     }
 
+    return num
 }
 
-let canvas = document.getElementsByClassName('container')[0];
 
+// Draw function
 
-function defaultGrid() {
+function drawGrid(num) {
 
-    for (let i = 1; i <= 256; i++) {
-        let div = document.createElement('div');
-        div.textContent = i;
-        canvas.appendChild(div);
+    for (let i = 1; i <= num; i++) {
+
+        let rowdiv = document.createElement('div');
+        rowdiv.className = 'rows';
+
+        for (let j = 1; j <= num; j++) {
+
+            let coldiv = document.createElement('div');
+            coldiv.className = 'columns';
+            // coldiv.textContent = j;
+            rowdiv.appendChild(coldiv);
+        }
+
+        canvas.appendChild(rowdiv);
     }
+
 }
+
+// reset grid
+
+// function holdOn() {
+//     window.location.reload()
+//     return Promise.resolve().then( () => {
+//         getNumber()
+//     })
+
+// }

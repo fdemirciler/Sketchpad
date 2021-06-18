@@ -6,9 +6,26 @@ btn.addEventListener('click', getNumber);
 
 const canvas = document.querySelector('.container');
 
+// Set grid size
+
 function gridSize(num) {
     canvas.style.setProperty("--grid-rows", num);
     canvas.style.setProperty("--grid-columns", num);
+}
+
+// Draw function
+
+function drawGrid(num) {
+
+    for (let i = 1; i <= num * num; i++) {
+
+        let rowdiv = document.createElement('div');
+        rowdiv.className = 'rows';
+        canvas.appendChild(rowdiv);
+     
+    }
+    gridSize(num)
+    setColor()
 }
 
 // User input and grid draw
@@ -29,23 +46,7 @@ function getNumber() {
     return num
 }
 
-
-// Draw function
-
-function drawGrid(num) {
-
-    for (let i = 1; i <= num * num; i++) {
-
-        let rowdiv = document.createElement('div');
-        rowdiv.className = 'rows';
-        canvas.appendChild(rowdiv);
-        gridSize(num)
-
-    }
-
-    // //setColor()
-}
-
+// Generate random colors
 
 function randomColor() {
 
@@ -53,27 +54,30 @@ function randomColor() {
 
 }
 
-document.documentElement.style.setProperty('--bg-color',randomColor());
-
+// Change background color on hover
 
 function setColor() {
-    let cells = document.querySelectorAll(".rows");
+    
+    const cells = Array.from(document.querySelectorAll(".rows"));
 
     for (let i = 0; i < cells.length; i++) {
-        cells[i].addEventListener("mouseover", function (e) {
+        cells[i].addEventListener("mouseover", function (i) {
             console.log(i)
-            e.target.style.backgroundColor = randomColor();
+            
+            e.style.backgroundColor = randomColor();
         });
     }
 }
 
-// const cells = document.getElementsByClassName('rows');
-// [].forEach.call(cells, function (p) {
-//     p.addEventListener('mouseover', function (e) {
-//         console.log(e)
+document.documentElement.style.setProperty('--bg-color',randomColor());
+
+
+// const clls = document.querySelectorAll('.rows');
+// Array.from(clls).forEach(cll => {
+//     cll.addEventListener('mouseover', g => {
+//         g.target.style.backgroundColor = randomColor()
 //     })
 // })
-
 
 // Array.from(document.getElementsByClassName('columns')).forEach(el => {
 

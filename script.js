@@ -1,6 +1,7 @@
 // Get elements
 
 const btn = document.getElementById('button');
+const resetButton = document.getElementById('resetbutton');
 
 btn.addEventListener('click', getNumber);
 
@@ -22,10 +23,13 @@ function drawGrid(num) {
         let rowdiv = document.createElement('div');
         rowdiv.className = 'rows';
         canvas.appendChild(rowdiv);
-     
+        rowdiv.addEventListener('mouseover', () => {
+            rowdiv.style.backgroundColor = randomColor()
+            //rowdiv.classList.add('hover');
+        })
     }
     gridSize(num)
-    setColor()
+
 }
 
 // User input and grid draw
@@ -50,52 +54,14 @@ function getNumber() {
 
 function randomColor() {
 
-    return Math.floor(Math.random() * 16777215).toString(16);
-
+    var o = Math.round,
+        r = Math.random,
+        s = 255;
+    return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
 }
 
-// Change background color on hover
+// reset button
+resetButton.onclick = function () {
+    canvas.innerHTML = "";
 
-function setColor() {
-    
-    const cells = Array.from(document.querySelectorAll(".rows"));
-
-    for (let i = 0; i < cells.length; i++) {
-        cells[i].addEventListener("mouseover", function (i) {
-            console.log(i)
-            
-            e.style.backgroundColor = randomColor();
-        });
-    }
 }
-
-document.documentElement.style.setProperty('--bg-color',randomColor());
-
-
-// const clls = document.querySelectorAll('.rows');
-// Array.from(clls).forEach(cll => {
-//     cll.addEventListener('mouseover', g => {
-//         g.target.style.backgroundColor = randomColor()
-//     })
-// })
-
-// Array.from(document.getElementsByClassName('columns')).forEach(el => {
-
-//     el.innerHTML = 'X'
-
-//     // .style.setProperty('--background-color', randomColor)
-
-// })
-
-// document.getElementsByClassName('columns').forEach(function (cell) {
-
-//     cell.addEventListener('mouseover', function (e) {
-//         e.style.backgroundColor = randomColor()
-//     })
-// })
-
-// window.onload = function() {
-//     setTimeout(function() {
-//       document.documentElement.style.cssText = "--main-background-color: red";
-//     }, 2000);
-//   }

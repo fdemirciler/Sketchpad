@@ -36,6 +36,7 @@ header {
 #resetbutton {
   font-size: 20px;
   font-style: bold;
+  color: darkslateblue;
   background-color: azure;
   border-color: aliceblue;
   border-radius: 5px;
